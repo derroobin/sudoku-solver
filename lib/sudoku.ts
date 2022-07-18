@@ -11,18 +11,6 @@ type FixedLengthArray<T, L extends number, TObj = [T, ...Array<T>]> = Pick<
 
 export type Board = FixedLengthArray<FixedLengthArray<number, 9>, 9>
 
-export const Sudoku = (): Board => [
-  [0, 0, 2, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 4, 0, 0, 7],
-  [1, 3, 0, 0, 8, 0, 0, 5, 0],
-  [0, 0, 9, 0, 0, 0, 0, 6, 0],
-  [6, 2, 0, 0, 0, 8, 4, 0, 0],
-  [0, 0, 5, 0, 2, 0, 0, 0, 0],
-  [8, 6, 0, 0, 3, 0, 0, 1, 0],
-  [9, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 5, 0, 0]
-]
-
 export const generateEmpty = () => {
   const x: Board = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,10 +41,6 @@ type OptionBoard = ReturnType<typeof createOptions>
 enum Reason {
   ILLEGAL = 1,
   EXHAUSTED
-}
-interface HistoryBoard {
-  board: OptionBoard
-  selection: number
 }
 
 const guessStart = () =>
