@@ -1,5 +1,10 @@
 import type { NextPage } from 'next'
-import React, { useState, useCallback, PropsWithChildren } from 'react'
+import React, {
+  useState,
+  useCallback,
+  PropsWithChildren,
+  useEffect
+} from 'react'
 import styles from '../styles/Home.module.css'
 import {
   clone,
@@ -10,6 +15,7 @@ import {
   removeGuess,
   Sudoku
 } from '../lib/sudoku'
+import { text } from 'stream/consumers'
 
 const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
   children,
@@ -25,12 +31,35 @@ const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
 }
 
 const all = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const lengthToOpacity = (n: number) => {
+  if (n > 6) return 'opacity'
+}
+
+const useTextOpacity = (n: number) => {
+  const [opacity, setOpacity] = useState('text-opacity-5')
+
+  useEffect(() => {
+    let opacity = 'text-opacity-5'
+    if (n < 4) {
+      opacity = 'text-opacity-40'
+    } else if (n < 6) {
+      opacity = 'text-opacity-20'
+    }
+    setOpacity(opacity)
+  }, [n])
+
+  return opacity
+}
+
 const RenderButtons: React.FC<{
   nums: number[]
   col: number
   row: number
   callback: (row: number, col: number, num: number) => void
 }> = ({ nums, row, col, callback }) => {
+  const textOpacity = useTextOpacity(nums.length)
+  console.log(textOpacity)
   return (
     <div className="grid grid-cols-3 place-items-center p-0 w-full h-full group relative">
       {all.map((x) => (
@@ -49,7 +78,7 @@ const RenderButtons: React.FC<{
         return (
           <span
             key={`r${row}c${col}${x}`}
-            className="group-hover:opacity-0 pointer-events-none absolute text-4xl text-black/25">
+            className={`${textOpacity} transition-colors group-hover:opacity-0 pointer-events-none absolute text-4xl text-black`}>
             {x}
           </span>
         )

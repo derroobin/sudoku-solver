@@ -238,37 +238,4 @@ export const generateGuesses = (initialBoard: OptionBoard): ReturnGuessed => {
   }
 
   return { error: Reason.EXHAUSTED }
-  /*
-  for (let i = 0; i < selection.length; i++) {
-    console.log(
-      "missing:",
-      board.flat().filter((x) => Array.isArray(x)).length,
-      "try:",
-      i,
-      "of:",
-      selection
-    );
-
-    const row = selection[i].i;
-    const col = selection[i].o;
-    const possible = clone(board[row][col]) as number[];
-    const store = board[row][col];
-
-    for (let o = 0; o < possible.length; o++) {
-      const element = possible[o];
-      board[row][col] = element;
-      const s = getSquare(row, col);
-
-      const currentTry = generateGuesses(board, guesses);
-
-      if (currentTry?.board) {
-        return { board };
-      }
-
-      board[row][col] = store;
-    }
-  }
-
-  console.log("exhausted");
-  return { error: Reason.EXHAUSTED };*/
 }
