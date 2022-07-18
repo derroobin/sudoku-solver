@@ -5,17 +5,14 @@ import React, {
   PropsWithChildren,
   useEffect
 } from 'react'
-import styles from '../styles/Home.module.css'
+
 import {
   clone,
-  createOptions,
   generateEmpty,
   generateGuesses,
   generateInitialGuesses,
-  removeGuess,
-  Sudoku
+  removeGuess
 } from '../lib/sudoku'
-import { text } from 'stream/consumers'
 
 const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
   children,
