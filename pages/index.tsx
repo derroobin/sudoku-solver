@@ -55,7 +55,6 @@ const RenderButtons: React.FC<{
   callback: (row: number, col: number, num: number) => void
 }> = ({ nums, row, col, callback }) => {
   const textOpacity = useTextOpacity(nums.length)
-  console.log(textOpacity)
   return (
     <div className="grid grid-cols-3 place-items-center p-0 w-full h-full group relative text-black dark:text-white">
       {all.map((x) => (
