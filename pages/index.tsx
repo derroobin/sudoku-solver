@@ -24,7 +24,7 @@ const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
   return (
     <button
       onClick={onClick}
-      className="mt-8 mx-auto mr-4 text-white bg-emerald-500 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg">
+      className="text-white mt-8 mx-auto mr-4 bg-emerald-500 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg">
       {children}
     </button>
   )
@@ -32,19 +32,15 @@ const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
 
 const all = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-const lengthToOpacity = (n: number) => {
-  if (n > 6) return 'opacity'
-}
-
 const useTextOpacity = (n: number) => {
-  const [opacity, setOpacity] = useState('text-opacity-5')
+  const [opacity, setOpacity] = useState('text-opacity-5 dark:text-opacity-5')
 
   useEffect(() => {
-    let opacity = 'text-opacity-5'
+    let opacity = 'text-opacity-5 dark:text-opacity-5'
     if (n < 4) {
-      opacity = 'text-opacity-40'
+      opacity = 'text-opacity-40 dark:text-opacity-40'
     } else if (n < 6) {
-      opacity = 'text-opacity-20'
+      opacity = 'text-opacity-20 dark:text-opacity-20'
     }
     setOpacity(opacity)
   }, [n])
@@ -61,7 +57,7 @@ const RenderButtons: React.FC<{
   const textOpacity = useTextOpacity(nums.length)
   console.log(textOpacity)
   return (
-    <div className="grid grid-cols-3 place-items-center p-0 w-full h-full group relative">
+    <div className="grid grid-cols-3 place-items-center p-0 w-full h-full group relative text-black dark:text-white">
       {all.map((x) => (
         <div
           key={`r${row}c${col}${x}`}
@@ -78,7 +74,7 @@ const RenderButtons: React.FC<{
         return (
           <span
             key={`r${row}c${col}${x}`}
-            className={`${textOpacity} transition-colors group-hover:opacity-0 pointer-events-none absolute text-4xl text-black`}>
+            className={`${textOpacity} dark-${textOpacity} text-black dark:text-slate-400 transition-colors group-hover:opacity-0 pointer-events-none absolute text-4xl`}>
             {x}
           </span>
         )
@@ -176,48 +172,50 @@ const Home: NextPage = () => {
     setTime(end - start)
   }, [board])
   return (
-    <div className="mx-auto w-max font-oxygen mt-6">
-      <h1 className="text-5xl mb-4">Easiest Sudoku Online</h1>
-      <table className="border-2 border-black">
-        <tbody>
-          {board.map((row, i) => {
-            return (
-              <tr
-                key={`r${i}`}
-                className={`${i % 3 === 0 ? 'border-t-2 border-black' : ''}`}>
-                {row.map((v, idx) => {
-                  return (
-                    <td
-                      className={`border border-black w-24 h-24 ${
-                        idx % 3 === 0 ? 'border-l-2' : ''
-                      } `}
-                      key={`r${i}${idx}`}>
-                      {typeof v === 'number' ? (
-                        <Num num={v} callback={() => clearCell(i, idx)} />
-                      ) : v[0] !== 0 ? (
-                        <RenderButtons
-                          nums={v}
-                          row={i}
-                          col={idx}
-                          callback={callback}
-                        />
-                      ) : (
-                        ''
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-      <Button onClick={solve}>Just solve already 🤓</Button>
-      <Button onClick={startOver}>start over 👶</Button>
-      <div className="mt-3">
-        <span>
-          Time for last action: {time >= 0 ? Math.round(time) : '-'}ms
-        </span>
+    <div className="dark:bg-slate-900 dark:text-slate-300 pt-6 min-h-screen">
+      <div className="mx-auto w-max font-oxygen ">
+        <h1 className="text-5xl mb-4">Easiest Sudoku Online</h1>
+        <table className="border-2 border-black">
+          <tbody>
+            {board.map((row, i) => {
+              return (
+                <tr
+                  key={`r${i}`}
+                  className={`${i % 3 === 0 ? 'border-t-2 border-black' : ''}`}>
+                  {row.map((v, idx) => {
+                    return (
+                      <td
+                        className={`border border-black w-24 h-24 ${
+                          idx % 3 === 0 ? 'border-l-2' : ''
+                        } `}
+                        key={`r${i}${idx}`}>
+                        {typeof v === 'number' ? (
+                          <Num num={v} callback={() => clearCell(i, idx)} />
+                        ) : v[0] !== 0 ? (
+                          <RenderButtons
+                            nums={v}
+                            row={i}
+                            col={idx}
+                            callback={callback}
+                          />
+                        ) : (
+                          ''
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        <Button onClick={solve}>Just solve already 🤓</Button>
+        <Button onClick={startOver}>start over 👶</Button>
+        <div className="mt-3">
+          <span>
+            Time for last action: {time >= 0 ? Math.round(time) : '-'}ms
+          </span>
+        </div>
       </div>
     </div>
   )
