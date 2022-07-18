@@ -174,27 +174,34 @@ const Home: NextPage = () => {
     <div className="dark:bg-slate-900 dark:text-slate-300 pt-6 min-h-screen">
       <div className="mx-auto w-max font-oxygen ">
         <h1 className="text-5xl mb-4">Easiest Sudoku Online</h1>
-        <table className="border-2 border-black">
+        <table className="border-4 border-black dark:border-sky-800">
           <tbody>
-            {board.map((row, i) => {
+            {board.map((row, rowIdx) => {
               return (
                 <tr
-                  key={`r${i}`}
-                  className={`${i % 3 === 0 ? 'border-t-2 border-black' : ''}`}>
-                  {row.map((v, idx) => {
+                  key={`r${rowIdx}`}
+                  className={`${
+                    rowIdx % 3 === 0
+                      ? 'border-t-4 border-black dark:border-sky-800'
+                      : ''
+                  }`}>
+                  {row.map((v, colIdx) => {
                     return (
                       <td
-                        className={`border border-black w-24 h-24 ${
-                          idx % 3 === 0 ? 'border-l-2' : ''
+                        className={`border border-black dark:border-sky-800 w-24 h-24 ${
+                          colIdx % 3 === 0 ? 'border-l-4' : ''
                         } `}
-                        key={`r${i}${idx}`}>
+                        key={`r${rowIdx}${colIdx}`}>
                         {typeof v === 'number' ? (
-                          <Num num={v} callback={() => clearCell(i, idx)} />
+                          <Num
+                            num={v}
+                            callback={() => clearCell(rowIdx, colIdx)}
+                          />
                         ) : v[0] !== 0 ? (
                           <RenderButtons
                             nums={v}
-                            row={i}
-                            col={idx}
+                            row={rowIdx}
+                            col={colIdx}
                             callback={callback}
                           />
                         ) : (
