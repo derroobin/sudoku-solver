@@ -98,7 +98,7 @@ const Home: NextPage = () => {
     setTime(end - start)
   }, [board])
   return (
-    <div className="dark:bg-slate-900 dark:text-slate-300 pt-6 min-h-screen">
+    <div className="dark:text-slate-300 pt-6 min-h-screen">
       <Head>
         <title>Sudoku Solver</title>
         <meta
