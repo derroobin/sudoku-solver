@@ -19,7 +19,7 @@ const Button: React.FC<PropsWithChildren<{ onClick: () => void }>> = ({
   return (
     <button
       onClick={onClick}
-      className="text-white mt-8 mx-auto mr-4 bg-emerald-500 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg">
+      className="text-white mt-8 mx-auto mr-4 bg-emerald-700 border-0 py-2 px-8 focus:outline-none hover:bg-emerald-600 rounded text-lg">
       {children}
     </button>
   )

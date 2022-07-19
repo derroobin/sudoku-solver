@@ -34,7 +34,7 @@ const CellNumberSelector: React.FC<Props> = ({ nums, row, col, callback }) => {
         <button
           key={`r${row}c${col}${x}`}
           disabled={nums.indexOf(x) < 0}
-          className="text-xs px-2 py-1 bg-emerald-500 hover:bg-opacity-50 rounded disabled:bg-opacity-10 w-full"
+          className="text-xs px-2 py-1 bg-emerald-700 hover:bg-emerald-600 rounded disabled:bg-opacity-10 w-full"
           onClick={() => callback(row, col, x)}>
           {x}
         </button>
