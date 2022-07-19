@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head'
 import React, {
   useState,
   useCallback,
@@ -169,6 +170,13 @@ const Home: NextPage = () => {
   }, [board])
   return (
     <div className="dark:bg-slate-900 dark:text-slate-300 pt-6 min-h-screen">
+      <Head>
+        <title>Sudoku Solver</title>
+        <meta
+          name="description"
+          content="Wave Function Collapse Sudoku Solver"
+        />
+      </Head>
       <div className="mx-auto w-max font-oxygen ">
         <h1 className="text-5xl mb-4">Easiest Sudoku Online</h1>
         <table className="border-4 border-black dark:border-sky-800">
